@@ -1,0 +1,168 @@
+<%- include('partials/header') %><!DOCTYPE html>
+<style>
+    .home-section {
+        background: linear-gradient(to right, #e6f0ff, #ffffff);
+        padding: 40px 20px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 26px;
+        margin: 40px 0 20px;
+        color: #1d2939;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: 0.3s ease-in-out;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .service-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .service-content {
+        padding: 15px;
+    }
+
+    .service-content h3 {
+        margin-bottom: 10px;
+        color: #1d2939;
+    }
+
+    .service-content p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: none;
+    }
+
+    .details-btn {
+        background-color: #1d2939;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .appointment-btn {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #00aaff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .service-card img {
+            height: 150px;
+        }
+    }
+</style>
+
+<div class="home-section">
+
+    <!-- IT Services Section -->
+    <h2 class="section-title">All IT Services</h2>
+    <div class="services-grid">
+        <% const itServices = [
+            { title: "CCTV Installation", image: "cctv.jpg", desc: "Full CCTV setup and remote access support." },
+            { title: "Networking", image: "networking.jpg", desc: "LAN/Wi-Fi setup, routers, and cable management." },
+            { title: "Computer Repair", image: "computer-repair.jpg", desc: "Hardware/software fixing, OS install, upgrades." },
+            { title: "Mobile Support", image: "mobile-repair.jpg", desc: "Android/iOS repairs, screen, battery & software." },
+            { title: "Printer Setup", image: "printer.jpg", desc: "Printer & scanner installation, driver setup." },
+            { title: "Server Maintenance", image: "server.jpg", desc: "Windows/Linux servers, backups, and updates." },
+            { title: "Web Designing", image: "web.jpg", desc: "Web designing and It  project services." }
+        ]; %>
+
+        <% itServices.forEach((s, i) => { %>
+            <div class="service-card">
+                <img src="/images/<%= s.image %>" alt="<%= s.title %>">
+                <div class="service-content">
+                    <h3><%= s.title %></h3>
+                    <button class="details-btn" onclick="toggleDetails('it', <%= i %>)">View Details</button>
+                    <p id="desc-it-<%= i %>"><%= s.desc %></p>
+                    <a class="appointment-btn" href="/appointment">Add Appointment</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <!-- Cyber Cafe Services Section -->
+    <h2 class="section-title">Cyber Cafe Services</h2>
+    <div class="services-grid">
+        <% const cyberServices = [
+            { title: "Internet Browsing", image: "browsing.jpg", desc: "High-speed internet for personal or official use." },
+            { title: "Online Form Filling", image: "form.jpg", desc: "Support for government, college & job forms." },
+            { title: "Printing & Scanning", image: "print-scan.jpg", desc: "B/W and color printing, document scanning." },
+            { title: "Typing & Resume", image: "typing.jpg", desc: "Document typing, resume creation & formatting." },
+            { title: "Lamination & Xerox", image: "lamination.jpg", desc: "Photo lamination and document Xerox services." },
+            { title: "School Project & College Project Models", image: "project.jpg", desc: "School project management and making BA,BCom,BSc project" }
+        ]; %>
+
+        <% cyberServices.forEach((s, i) => { %>
+            <div class="service-card">
+                <img src="/images/<%= s.image %>" alt="<%= s.title %>">
+                <div class="service-content">
+                    <h3><%= s.title %></h3>
+                    <button class="details-btn" onclick="toggleDetails('cyber', <%= i %>)">View Details</button>
+                    <p id="desc-cyber-<%= i %>"><%= s.desc %></p>
+                    <a class="appointment-btn" href="/appointment">Add Appointment</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <!-- Mobility Services Section -->
+    <h2 class="section-title">Mobility Services</h2>
+    <div class="services-grid">
+        <% const mobilityServices = [
+            { title: "Mobile Repairing", image: "mobile.jpg", desc: "Repair screens, batteries, speakers, mics, ports." },
+            { title: "Software Flashing", image: "flashing.jpg", desc: "OS reinstallation, boot fix, FRP unlock support." },
+            { title: "Mobile Accessories", image: "accessories.jpg", desc: "Chargers, covers, screen guards, and headphones." },
+            { title: "Data Backup/Recovery", image: "backup.jpg", desc: "Backup & restore mobile data and contacts." }
+        ]; %>
+
+        <% mobilityServices.forEach((s, i) => { %>
+            <div class="service-card">
+                <img src="/images/<%= s.image %>" alt="<%= s.title %>">
+                <div class="service-content">
+                    <h3><%= s.title %></h3>
+                    <button class="details-btn" onclick="toggleDetails('mob', <%= i %>)">View Details</button>
+                    <p id="desc-mob-<%= i %>"><%= s.desc %></p>
+                    <a class="appointment-btn" href="/appointment">Add Appointment</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<script>
+    function toggleDetails(type, index) {
+        const desc = document.getElementById(`desc-${type}-${index}`);
+        desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+
+<%- include('partials/footer') %>

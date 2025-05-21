@@ -1,0 +1,121 @@
+<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Appointment</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e0f2f1;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 25px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00695c;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #00796b;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #004d40;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Book an Appointment</h2>
+    <form action="/submit-appointment" method="POST" onsubmit="return validateForm()">
+      <label for="name">Full Name*</label>
+      <input type="text" name="name" id="name" required />
+
+      <label for="email">Email*</label>
+      <input type="email" name="email" id="email" required />
+
+      <label for="phone">Phone*</label>
+      <input type="tel" name="phone" id="phone" required pattern="[0-9]{10}" />
+
+      <label for="service">Select Service*</label>
+      <select name="service" id="service" required>
+        <option value="">-- Choose --</option>
+        <option>CCTV Installation</option>
+        <option>Computer Repair</option>
+        <option>Networking</option>
+        <option>Cyber Cafe</option>
+        <option>Mobile Repair</option>
+      </select>
+
+      <label for="date">Preferred Date*</label>
+      <input type="date" name="date" id="date" required />
+
+      <label for="time">Preferred Time*</label>
+      <input type="time" name="time" id="time" required />
+
+      <label for="message">Message (optional)</label>
+      <textarea name="message" id="message" rows="3"></textarea>
+
+      <button type="submit">Submit Appointment</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const phone = document.getElementById("phone").value;
+      if (phone.length !== 10 || isNaN(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
+
+
+<%- include('partials/footer') %>

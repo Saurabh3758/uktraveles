@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment Confirmed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .message-box {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .message-box h2 {
+            color: #00796b;
+            margin-bottom: 15px;
+        }
+
+        .message-box p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .message-box a {
+            text-decoration: none;
+            background-color: #00796b;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .message-box a:hover {
+            background-color: #004d40;
+        }
+
+        @media (max-width: 600px) {
+            .message-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box">
+        <h2>Thank You, <%= name %>!</h2>
+        <p>Your appointment has been successfully booked.</p>
+        <a href="/appointment">Book Another</a>
+    </div>
+</body>
+</html>
