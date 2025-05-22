@@ -126,6 +126,7 @@ app.get('/home', (req, res) => {
   res.render('home');
 });
 
+<<<<<<< HEAD
 app.get('/about', (req, res) => {
   res.render('about');
 });
@@ -133,4 +134,10 @@ app.get('/about', (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+=======
+// ✅ Start Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+>>>>>>> 47cdf3e6c7e4c55e06d2ecd0e360b111012942b7
 });
