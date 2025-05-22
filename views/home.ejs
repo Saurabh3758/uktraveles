@@ -1,168 +1,144 @@
-<%- include('partials/header') %><!DOCTYPE html>
-<style>
-    .home-section {
-        background: linear-gradient(to right, #e6f0ff, #ffffff);
-        padding: 40px 20px;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
 
-    .section-title {
-        text-align: center;
-        font-size: 26px;
-        margin: 40px 0 20px;
-        color: #1d2939;
-    }
+ <!-- Hero Section (Same container) -->
+<section class="hero">
+  <img src="/images/Uttarakhand.jpg" alt="Uttarakhand Travel" class="hero-img">
+  <div class="hero-content">
+    <h1>Explore Uttarakhand with Uttarakhand Travel</h1>
+    <p>Your one-stop solution for travel, rides & rentals</p>
+    <button onclick="window.location.href='/book'">Book Now</button>
+  </div>
+</section>
 
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        max-width: 1200px;
-        margin: auto;
-    }
-
-    .service-card {
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: 0.3s ease-in-out;
-    }
-
-    .service-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .service-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .service-content {
-        padding: 15px;
-    }
-
-    .service-content h3 {
-        margin-bottom: 10px;
-        color: #1d2939;
-    }
-
-    .service-content p {
-        font-size: 14px;
-        margin-bottom: 10px;
-        display: none;
-    }
-
-    .details-btn {
-        background-color: #1d2939;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 10px;
-    }
-
-    .appointment-btn {
-        display: inline-block;
-        padding: 8px 12px;
-        background-color: #00aaff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-
-    @media screen and (max-width: 600px) {
-        .service-card img {
-            height: 150px;
-        }
-    }
-</style>
-
-<div class="home-section">
-
-    <!-- IT Services Section -->
-    <h2 class="section-title">All IT Services</h2>
-    <div class="services-grid">
-        <% const itServices = [
-            { title: "CCTV Installation", image: "cctv.jpg", desc: "Full CCTV setup and remote access support." },
-            { title: "Networking", image: "networking.jpg", desc: "LAN/Wi-Fi setup, routers, and cable management." },
-            { title: "Computer Repair", image: "computer-repair.jpg", desc: "Hardware/software fixing, OS install, upgrades." },
-            { title: "Mobile Support", image: "mobile-repair.jpg", desc: "Android/iOS repairs, screen, battery & software." },
-            { title: "Printer Setup", image: "printer.jpg", desc: "Printer & scanner installation, driver setup." },
-            { title: "Server Maintenance", image: "server.jpg", desc: "Windows/Linux servers, backups, and updates." },
-            { title: "Web Designing", image: "web.jpg", desc: "Web designing and It  project services." }
-        ]; %>
-
-        <% itServices.forEach((s, i) => { %>
-            <div class="service-card">
-                <img src="/images/<%= s.image %>" alt="<%= s.title %>">
-                <div class="service-content">
-                    <h3><%= s.title %></h3>
-                    <button class="details-btn" onclick="toggleDetails('it', <%= i %>)">View Details</button>
-                    <p id="desc-it-<%= i %>"><%= s.desc %></p>
-                    <a class="appointment-btn" href="/appointment">Add Appointment</a>
-                </div>
-            </div>
-        <% }) %>
+<!-- Top Destinations -->
+<div class="container"style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <section>
+    <h2>⛰️ Top Destinations in Uttarakhand</h2>
+    <div class="flex-grid">
+      <% const destinations = [
+        { name: "Kedarnath", img: "/images/kedarnath.jpg", desc: "Spiritual vibes & trek route" },
+        { name: "Nainital", img: "/images/nainital.jpg", desc: "Lake city & scenic beauty" },
+        { name: "Auli", img: "/images/auli.jpg", desc: "Snowy peaks & skiing paradise" }
+      ]; %>
+      <% destinations.forEach(dest => { %>
+        <div class="card">
+          <img src="<%= dest.img %>" alt="<%= dest.name %>">
+          <h3><%= dest.name %></h3>
+          <p><%= dest.desc %></p>
+        </div>
+      <% }); %>
     </div>
-
-    <!-- Cyber Cafe Services Section -->
-    <h2 class="section-title">Cyber Cafe Services</h2>
-    <div class="services-grid">
-        <% const cyberServices = [
-            { title: "Internet Browsing", image: "browsing.jpg", desc: "High-speed internet for personal or official use." },
-            { title: "Online Form Filling", image: "form.jpg", desc: "Support for government, college & job forms." },
-            { title: "Printing & Scanning", image: "print-scan.jpg", desc: "B/W and color printing, document scanning." },
-            { title: "Typing & Resume", image: "typing.jpg", desc: "Document typing, resume creation & formatting." },
-            { title: "Lamination & Xerox", image: "lamination.jpg", desc: "Photo lamination and document Xerox services." },
-            { title: "School Project & College Project Models", image: "project.jpg", desc: "School project management and making BA,BCom,BSc project" }
-        ]; %>
-
-        <% cyberServices.forEach((s, i) => { %>
-            <div class="service-card">
-                <img src="/images/<%= s.image %>" alt="<%= s.title %>">
-                <div class="service-content">
-                    <h3><%= s.title %></h3>
-                    <button class="details-btn" onclick="toggleDetails('cyber', <%= i %>)">View Details</button>
-                    <p id="desc-cyber-<%= i %>"><%= s.desc %></p>
-                    <a class="appointment-btn" href="/appointment">Add Appointment</a>
-                </div>
-            </div>
-        <% }) %>
-    </div>
-
-    <!-- Mobility Services Section -->
-    <h2 class="section-title">Mobility Services</h2>
-    <div class="services-grid">
-        <% const mobilityServices = [
-            { title: "Mobile Repairing", image: "mobile.jpg", desc: "Repair screens, batteries, speakers, mics, ports." },
-            { title: "Software Flashing", image: "flashing.jpg", desc: "OS reinstallation, boot fix, FRP unlock support." },
-            { title: "Mobile Accessories", image: "accessories.jpg", desc: "Chargers, covers, screen guards, and headphones." },
-            { title: "Data Backup/Recovery", image: "backup.jpg", desc: "Backup & restore mobile data and contacts." }
-        ]; %>
-
-        <% mobilityServices.forEach((s, i) => { %>
-            <div class="service-card">
-                <img src="/images/<%= s.image %>" alt="<%= s.title %>">
-                <div class="service-content">
-                    <h3><%= s.title %></h3>
-                    <button class="details-btn" onclick="toggleDetails('mob', <%= i %>)">View Details</button>
-                    <p id="desc-mob-<%= i %>"><%= s.desc %></p>
-                    <a class="appointment-btn" href="/appointment">Add Appointment</a>
-                </div>
-            </div>
-        <% }) %>
-    </div>
+  </section>
 </div>
 
-<script>
-    function toggleDetails(type, index) {
-        const desc = document.getElementById(`desc-${type}-${index}`);
-        desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
-    }
-</script>
+<!-- Travel Types -->
+<div class="container"style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;" >
+  <section>
+    <h2>🎒 Choose Your Travel Type</h2>
+    <div class="flex-grid">
+      <% const types = [
+        { name: "Adventure", img: "/images/adventure.jpg", desc: "Trek, ski & explore" },
+        { name: "Spiritual", img: "/images/spiritual.jpg", desc: "Temple tours & rituals" },
+        { name: "Family", img: "/images/family.jpg", desc: "Safe & fun for all ages" }
+      ]; %>
+      <% types.forEach(type => { %>
+        <div class="card">
+          <img src="<%= type.img %>" alt="<%= type.name %>">
+          <h3><%= type.name %></h3>
+          <p><%= type.desc %></p>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+</div>
 
+<!-- Our Rides -->
+<div class="container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <section>
+    <h2>🚗 Our Rides</h2>
+    <div class="flex-grid">
+      <% const rides = [
+        { name: "Bike on Rent", img: "/images/bike.jpg", desc: "Convenient & affordable" },
+        { name: "Car Rentals", img: "/images/car.jpg", desc: "Comfortable for long drives" }
+      ]; %>
+      <% rides.forEach(ride => { %>
+        <div class="card">
+          <img src="<%= ride.img %>" alt="<%= ride.name %>">
+          <h3><%= ride.name %></h3>
+          <p><%= ride.desc %></p>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+</div>
 
-<%- include('partials/footer') %>
+<!-- Bike Rent Promo -->
+<div class="container"style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <section class="bike-promo">
+    <div class="bike-content">
+      <h2>🏍️ Rent a Bike Now</h2>
+      <p>Zoom through the hills of Uttarakhand!</p>
+      <ul>
+        <li>Starting from ₹499/day</li>
+        <li>Royal Enfield, Scooty, Pulsar & more</li>
+        <li>Easy booking & verified documents</li>
+      </ul>
+      <button onclick="window.location.href='/bike-rent'">Explore Bikes</button>
+    </div>
+    <div class="bike-img">
+      <img src="/images/bike-rental.jpg" alt="Bike Rental">
+    </div>
+  </section>
+</div>
+
+<!-- Booking Form -->
+<div class="container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <section class="booking-form" id="booking" style="align-items: center;">
+    <h2>📝 Book Your Ride or Trip</h2>
+    <form action="/book" method="POST" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <select name="destination" required>
+        <option value="">Select Destination</option>
+        <option value="Kedarnath">Kedarnath</option>
+        <option value="Nainital">Nainital</option>
+        <option value="Auli">Auli</option>
+      </select>
+      <input type="file" name="aadharImage" accept=".jpg,.jpeg,.png" required>
+      <input type="file" name="photo" accept=".jpg,.jpeg,.png" required>
+      <button type="submit">Submit Booking</button>
+    </form>
+  </section>
+</div>
+
+<!-- Why Us -->
+<div class="container"style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <section class="why-us" style="align-items: center;">
+    <h2>🌟 Why Choose Hi-Tech Rentals?</h2>
+    <ul>
+      <li>✅ Trusted travel partner in Uttarakhand</li>
+      <li>✅ Verified drivers and vehicles</li>
+      <li>✅ 24x7 Support & Assistance</li>
+      <li>✅ Affordable pricing with no hidden charges</li>
+    </ul>
+  </section>
+</div>
+
+<!-- CTA -->
+<div class="container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+  <section class="cta" style="align-items: center;">
+    <h2>📞 Ready to Ride?</h2>
+    <p>Call us now at <strong>+91-9876543210</strong> or click below to start your journey.</p>
+    <button onclick="window.location.href='/book'">Book Now</button>
+  </section>
+</div>
+  <%- include('partials/footer') %>
+</body>
+</html>

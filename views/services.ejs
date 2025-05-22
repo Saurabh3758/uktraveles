@@ -1,1 +1,199 @@
-<%- include('partials/header') %><h1>Online Services</h1><%- include('partials/footer') %>
+<%- include('partials/header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Our Services - Hi-Tech Rentals</title>
+</head>
+<body>
+
+<div class="services-container">
+  <h1 class="page-title">🌍 Our Travel Services Across Uttarakhand</h1>
+
+  <% const services = [
+    {
+      name: "Kedarnath",
+      img: "/images/kedarnath.jpg",
+      desc: [
+        "One of the holiest Hindu temples dedicated to Lord Shiva.",
+        "Located in the majestic Himalayas at 11,755 ft.",
+        "Accessible by a 16 km trek from Gaurikund.",
+        "Surrounded by snow-capped peaks and stunning views.",
+        "Pilgrimage season runs from May to October.",
+        "Part of the Char Dham Yatra.",
+        "Ponies, palkis and helicopter rides available.",
+        "Nearby attractions include Vasuki Tal & Chorabari Glacier.",
+        "Spiritual peace combined with adventure trekking.",
+        "Our packages include travel, accommodation, and guide support."
+      ]
+    },
+    {
+      name: "Nainital",
+      img: "/images/nainital.jpg",
+      desc: [
+        "Popular hill station famous for its serene lake views.",
+        "Boating in the heart-shaped Naini Lake is a must-do.",
+        "Visit Naina Devi Temple, a spiritual gem by the lake.",
+        "Eco Cave Gardens and Snow View Point are highlights.",
+        "Mall Road is perfect for shopping and food tasting.",
+        "Suitable for romantic, family, and group travel.",
+        "Enjoy cable car rides and evening strolls.",
+        "Scenic beauty year-round, especially in winter snow.",
+        "Our Nainital trips include local sightseeing and hotel stays.",
+        "Safe and guided travel with professional drivers."
+      ]
+    },
+    {
+      name: "Auli",
+      img: "/images/auli.jpg",
+      desc: [
+        "Skiing capital of India located in Chamoli district.",
+        "Offers snow sports from December to March.",
+        "Asia's longest cable car runs from Joshimath to Auli.",
+        "Panoramic views of Nanda Devi and Trishul peaks.",
+        "Great for beginners and experienced skiers.",
+        "Nearby attractions: Gorson Bugyal, Chenab Lake.",
+        "Trekking and camping options available in summer.",
+        "Professional ski instructors and gear rentals included.",
+        "Peaceful mountain retreat with beautiful lodges.",
+        "Ideal destination for winter adventure lovers."
+      ]
+    },
+    {
+      name: "Rishikesh",
+      img: "/images/rishikesh.jpg",
+      desc: [
+        "Yoga capital of the world and a spiritual haven.",
+        "River rafting and bungee jumping for thrill seekers.",
+        "Visit Laxman Jhula, Ram Jhula, and Triveni Ghat.",
+        "Attend evening Ganga Aarti on the riverbanks.",
+        "Camping under the stars by the river is a must-do.",
+        "Backpacking-friendly with lots of ashrams and cafes.",
+        "Great blend of adventure and spirituality.",
+        "Perfect for solo, youth, and corporate retreats.",
+        "Get Ayurveda spa treatments and meditation sessions.",
+        "Our package includes rafting, camping, and local guide."
+      ]
+    },
+    {
+      name: "Mussoorie",
+      img: "/images/mussoorie.jpg",
+      desc: [
+        "Queen of the Hills with a British-era charm.",
+        "Visit Kempty Falls, Gun Hill, and Company Garden.",
+        "Cable car to Gun Hill offers fantastic valley views.",
+        "Explore Mall Road’s shopping and street food.",
+        "Ideal for honeymooners and family outings.",
+        "Breathtaking sunset views from Cloud’s End.",
+        "Surrounded by lush green hills and colonial architecture.",
+        "Enjoy pony rides and mountain bike trails.",
+        "Stay in cozy cottages or luxury hotels.",
+        "Full-day tours with sightseeing and transport included."
+      ]
+    },
+    {
+      name: "Haridwar",
+      img: "/images/haridwar.jpg",
+      desc: [
+        "Ancient city where Ganga enters the plains.",
+        "Famous for Ganga Aarti at Har Ki Pauri ghat.",
+        "One of the seven holiest places (Sapta Puri).",
+        "Hosts the famous Kumbh Mela every 12 years.",
+        "Spiritual rituals and yoga practices abound.",
+        "Ideal for spiritual seekers and peaceful stays.",
+        "Also a gateway to Char Dham pilgrimage.",
+        "Sapt Rishi Ashram and Bharat Mata Mandir nearby.",
+        "We provide guided tours and safe accommodation.",
+        "Clean and sanitized vehicles for group travel."
+      ]
+    },
+    {
+      name: "Jim Corbett National Park",
+      img: "/images/park.jpg",
+      desc: [
+        "India’s oldest national park – home to the Bengal Tiger.",
+        "Wildlife safari in the buffer and core zones.",
+        "Jeep and canter safaris for spotting leopards, elephants.",
+        "Stay in jungle resorts and eco-lodges.",
+        "Bird watching tours available with local guides.",
+        "Adventure zones: zipline, rope bridge, rock climbing.",
+        "Photography enthusiasts’ paradise.",
+        "Visit Garjiya Devi temple and Corbett Museum.",
+        "We offer safari permit booking and guides.",
+        "Packages for couples, families, and school groups."
+      ]
+    },
+    {
+      name: "Valley of Flowers",
+      img: "/images/valley.jpg",
+      desc: [
+        "UNESCO World Heritage Site in Chamoli.",
+        "Alpine valley blooms with 300+ flower species.",
+        "Best visited during July to September.",
+        "High-altitude trek starting from Govindghat.",
+        "Trek through Pushpawati river valley.",
+        "Rare Himalayan plants and endangered animals.",
+        "Combine with Hemkund Sahib pilgrimage.",
+        "Camping and scenic photography musts.",
+        "Professional trekking guides included.",
+        "Ideal for botanists, nature lovers, and trekkers."
+      ]
+    },
+    {
+      name: "Badrinath",
+      img: "/images/badrinath.jpg",
+      desc: [
+        "Sacred temple dedicated to Lord Vishnu.",
+        "One of the Char Dham pilgrimage sites.",
+        "Located between Nar and Narayan mountain ranges.",
+        "River Alaknanda flows beside the temple.",
+        "Open from April to November yearly.",
+        "Tapt Kund hot springs near the temple.",
+        "Visit Mana village – India’s last village.",
+        "Safe pilgrimage tours with guides and hotels.",
+        "Scenic drive through winding Himalayan roads.",
+        "Special packages for elderly and spiritual seekers."
+      ]
+    },
+    {
+      name: "Lansdowne",
+      img: "/images/lansdowne.jpg",
+      desc: [
+        "Quiet hill station with colonial military charm.",
+        "Well-maintained by Garhwal Rifles cantonment.",
+        "Visit Bhulla Tal, War Memorial, St. John’s Church.",
+        "Perfect for offbeat travelers and peace seekers.",
+        "Nature walks and birdwatching are top activities.",
+        "Great weekend getaway from Delhi/NCR.",
+        "Boating, picnic spots, and scenic valleys.",
+        "Minimal crowds – ideal for couples.",
+        "Stay in heritage homes and eco-stays.",
+        "We provide local sightseeing, transport, and stay."
+      ]
+    }
+  ]; %>
+
+ 
+  <% services.forEach((service, index) => { %>
+    <div class="service-block <%= index % 2 === 0 ? 'left-img' : 'right-img' %>">
+      <div class="service-img">
+        <img src="<%= service.img %>" alt="<%= service.name %>">
+      </div>
+      <div class="service-details">
+        <h2><%= service.name %></h2>
+        <ul>
+          <% service.desc.forEach(line => { %>
+            <li><%= line %></li>
+          <% }) %>
+        </ul>
+        <a href="/book?service=<%= encodeURIComponent(service.name) %>" class="book-btn">Book Now</a>
+      </div>
+    </div>
+  <% }) %>
+
+</div>
+
+<%- include('partials/footer') %>
+</body>
+</html

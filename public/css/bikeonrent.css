@@ -1,0 +1,124 @@
+<%- include("header") %>
+
+<style>
+  .bike-rent-section {
+    background: #f5f7fa;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .bike-rent-container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .bike-rent-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .bike-rent-header h2 {
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+
+  .bike-rent-header p {
+    color: #555;
+    font-size: 18px;
+  }
+
+  .bike-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .bike-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    width: 300px;
+    transition: transform 0.3s;
+  }
+
+  .bike-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .bike-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .bike-card-content {
+    padding: 20px;
+  }
+
+  .bike-card-content h3 {
+    color: #34495e;
+    margin-bottom: 10px;
+  }
+
+  .bike-card-content p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .rent-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+  }
+
+  .rent-button:hover {
+    background: #2980b9;
+  }
+
+  @media (max-width: 768px) {
+    .bike-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+<section class="bike-rent-section">
+  <div class="bike-rent-container">
+    <div class="bike-rent-header">
+      <h2>Bike Rentals in Uttarakhand</h2>
+      <p>Choose your ride and explore the beauty of the mountains with ease and style.</p>
+    </div>
+
+    <div class="bike-cards">
+      <% const bikes = [
+        { name: "Royal Enfield Classic 350", desc: "Perfect for long mountain rides with comfort and power.", img: "/images/enfield.jpg" },
+        { name: "Bajaj Avenger", desc: "Enjoy smooth rides through valleys and towns of Uttarakhand.", img: "/images/avenger.jpg" },
+        { name: "Honda Activa 6G", desc: "Best for short rides in towns like Mussoorie, Dehradun & Rishikesh.", img: "/images/activa.jpg" },
+        { name: "Yamaha FZ", desc: "For those who love performance and a sporty ride through the hills.", img: "/images/fz.jpg" },
+        { name: "Hero XPulse", desc: "Go off-road and experience the thrill of adventure in remote villages.", img: "/images/xpulse.jpg" }
+      ]; %>
+
+      <% bikes.forEach(bike => { %>
+        <div class="bike-card">
+          <img src="<%= bike.img %>" alt="<%= bike.name %>">
+          <div class="bike-card-content">
+            <h3><%= bike.name %></h3>
+            <p><%= bike.desc %></p>
+            <a href="/book" class="rent-button">Rent Now</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include("footer") %>

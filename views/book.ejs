@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Ride</title>
+  <link rel="stylesheet" href="/css/book.css">
+</head>
+<body>
+  <div class="container">
+    <button id="showFormBtn">Book a Ride</button>
+
+    <form id="bookingForm" action="/book-ride" method="POST" enctype="multipart/form-data">
+      <h2>Book Your Ride Across Uttarakhand</h2>
+
+      <label for="name">Full Name</label>
+      <input type="text" name="name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" required>
+
+      <label for="destination">Destination</label>
+      <select name="destination" required>
+        <option disabled selected>Select a destination</option>
+        <option>Dehradun</option>
+        <option>Mussoorie</option>
+        <option>Nainital</option>
+        <option>Rishikesh</option>
+        <option>Haridwar</option>
+        <option>Kedarnath</option>
+        <option>Badrinath</option>
+        <option>Joshimath</option>
+        <option>Chopta</option>
+        <option>Auli</option>
+        <option>Almora</option>
+        <option>Binsar</option>
+        <option>Kausani</option>
+        <option>Munsiyari</option>
+        <option>Valley of Flowers</option>
+      </select>
+
+      <label for="startDate">Start Date</label>
+      <input type="date" name="startDate" required>
+
+      <label for="endDate">End Date</label>
+      <input type="date" name="endDate" required>
+
+      <label for="aadhaar">Upload Aadhaar (PDF/JPG)</label>
+      <input type="file" name="aadhaar" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <label for="photo">Upload Photo</label>
+      <input type="file" name="photo" accept=".jpg,.jpeg,.png" required>
+
+      <button type="submit">Submit Booking</button>
+    </form>
+  </div>
+
+  <script>
+    const btn = document.getElementById('showFormBtn');
+    const form = document.getElementById('bookingForm');
+    btn.addEventListener('click', () => {
+      form.style.display = 'block';
+      btn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

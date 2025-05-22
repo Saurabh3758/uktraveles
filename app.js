@@ -1,150 +1,136 @@
-require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const path = require('path');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
-const twilio = require('twilio');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const Booking = require('./models/Booking');
+require('dotenv').config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ MongoDB Connection
+// MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-})
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+}).then(() => console.log('✅ Connected to MongoDB Atlas'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// ✅ Mongoose Model
-const appointmentSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  service: String,
-  message: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
-const Appointment = mongoose.model('Appointment', appointmentSchema);
-
-// ✅ Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+// View Engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// ✅ Routes
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Multer Setup
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'public/uploads/'),
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueName + path.extname(file.originalname));
+  }
+});
+const upload = multer({ storage });
+
+// Routes
 app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/appointment', (req, res) => {
-  res.render('appointment');
+app.get('/services', (req, res) => {
+  const services = [
+    {
+      name: "Kedarnath",
+      img: "/images/kedarnath.jpg",
+      desc: [
+        "Located in the Garhwal Himalayan range.",
+        "One of the Char Dham pilgrimage sites.",
+        "Famous for Kedarnath Temple dedicated to Lord Shiva.",
+        "Trek access from Gaurikund.",
+        "Surrounded by snow-capped peaks.",
+        "Spiritual aura and peaceful environment.",
+        "Accessible via helicopter and trekking.",
+        "Cool weather throughout the year.",
+        "Nearby attractions include Vasuki Tal and Chorabari Tal.",
+        "Best visited during May to October."
+      ]
+    },
+    {
+      name: "Nainital",
+      img: "/images/nainital.jpg",
+      desc: [
+        "Popular hill station in Kumaon region.",
+        "Known for Naini Lake and boating.",
+        "Surrounded by mountains and forests.",
+        "Mall Road for shopping and food.",
+        "Naina Devi Temple attracts thousands.",
+        "Ideal for families and couples.",
+        "Snow View Point and Tiffin Top offer great views.",
+        "Adventure activities available nearby.",
+        "Cool climate and peaceful vibes.",
+        "Accessible from major cities in North India."
+      ]
+    }
+    // Add more destinations here
+  ];
+  res.render('services', { services });
 });
 
-app.post('/submit-appointment', async (req, res) => {
+app.get('/book', (req, res) => {
+  res.render('book');
+});
+
+app.post('/book-ride', upload.fields([{ name: 'aadhaar' }, { name: 'photo' }]), async (req, res) => {
   try {
-    const { name, email, phone, service, message } = req.body;
+    const data = {
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+      destination: req.body.destination,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      aadhaar: req.files['aadhaar'][0].filename,
+      photo: req.files['photo'][0].filename
+    };
 
-    // Format phone with +91 if not already
-    let formattedPhone = phone;
-    if (!phone.startsWith('+')) {
-      formattedPhone = '+91' + phone;
-    }
+    const newBooking = new Booking(data);
+    await newBooking.save();
 
-    const newAppointment = new Appointment({
-      name,
-      email,
-      phone: formattedPhone,
-      service,
-      message
-    });
-
-    await newAppointment.save();
-    res.render('success', { name });
+    res.send(`
+      <h2>✅ Booking successful!</h2>
+      <p>Thank you, ${data.name}. We'll contact you soon.</p>
+      <a href="/">Back to Home</a>
+    `);
   } catch (err) {
-    console.error('Submission Error:', err);
-    res.status(500).send('Error submitting appointment');
+    console.error("❌ Error saving booking:", err);
+    res.status(500).send("Something went wrong. Please try again.");
   }
 });
 
 app.get('/admin', async (req, res) => {
   try {
-    const appointments = await Appointment.find().sort({ createdAt: -1 });
-    res.render('admin', { appointments });
+    const bookings = await Booking.find().sort({ createdAt: -1 });
+    res.render('admin', { bookings });
   } catch (err) {
-    console.error('Admin Load Error:', err);
-    res.status(500).send('Error loading admin panel');
+    console.error("Error loading admin panel:", err);
+    res.status(500).send("Unable to load admin panel.");
   }
 });
 
-app.post('/delete/:id', async (req, res) => {
-  try {
-    await Appointment.findByIdAndDelete(req.params.id);
-    res.redirect('/admin');
-  } catch (err) {
-    console.error('Delete Error:', err);
-    res.status(500).send('Failed to delete appointment');
-  }
+app.get('/bikeonrent', (req, res) => {
+  res.render('bikeonrent');
 });
 
-app.post('/reply/:id', async (req, res) => {
-  try {
-    const appointment = await Appointment.findById(req.params.id);
-    if (!appointment) return res.status(404).send('Appointment not found');
-
-    const replyMessage = req.body.message;
-
-    if (
-      !process.env.EMAIL || !process.env.EMAIL_PASS ||
-      !process.env.TWILIO_SID || !process.env.TWILIO_AUTH || !process.env.TWILIO_PHONE
-    ) {
-      return res.status(500).send('Server config error: Missing environment variables');
-    }
-
-    // ✅ Send Email
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASS
-      }
-    });
-
-    await transporter.sendMail({
-      from: `"IT Services" <${process.env.EMAIL}>`,
-      to: appointment.email,
-      subject: 'Reply to your appointment request',
-      text: replyMessage
-    });
-
-    // ✅ Send SMS
-    const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
-
-    let toPhone = appointment.phone;
-    if (!toPhone.startsWith('+')) {
-      toPhone = '+91' + toPhone;
-    }
-
-    await client.messages.create({
-      body: replyMessage,
-      from: process.env.TWILIO_PHONE,
-      to: toPhone
-    });
-
-    res.redirect('/admin');
-  } catch (err) {
-    console.error('Reply Error:', err);
-    res.status(500).send('Internal Server Error: ' + err.message);
-  }
+app.get('/home', (req, res) => {
+  res.render('home');
 });
 
-// ✅ Start Server
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

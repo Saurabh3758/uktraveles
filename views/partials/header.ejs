@@ -1,23 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hi-Tech Solution</title>
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
-<body>
-  <header>
-    <h1>Hi-Tech Solution & Cyber Cafe</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/register">Register</a>
-      <a href="/appointment">Appointment</a>
-      <a href="/contact">Contact</a>
-      <a href="/internet">Internet</a>
-      <a href="/printing">Printing</a>
-      <a href="/services">Services</a>
-      <a href="/support">Support</a>
-    </nav>
-  </header>
-  <main>
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="logo">Uttarakhand Travel</a>
+      <ul class="nav-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/book">Book a Ride</a></li>
+        <li><a href="/bikeonrent">Bike on Rent</a></li>
+        <li><a href="services">Travel Services</a></li>
+        <li><a href="/about">About Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <style>
+    /* Basic header navbar styling */
+    .navbar {
+      background: #0077b6;
+      padding: 15px 20px;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    .nav-links li a:hover,
+    .nav-links li a:focus {
+      background-color: #023e8a;
+    }
+
+    /* Responsive: stack menu on smaller screens */
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .nav-links li {
+        margin-bottom: 8px;
+      }
+      .nav-links li a {
+        display: block;
+        width: 100%;
+      }
+    }
+  </style>
+</header>
+
