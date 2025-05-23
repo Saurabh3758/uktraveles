@@ -13,6 +13,7 @@ body {
   line-height: 1.6;
 }
 
+/* Header */
 /* Hero Section */
 .hero {
   position: relative;
@@ -66,8 +67,6 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 40px 20px;
-  align-items: center;
-  align-self: c;
 }
 
 /* Section Titles */
@@ -82,7 +81,7 @@ section h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .card, .cat-card {
@@ -238,23 +237,7 @@ section h2 {
   background-color: #ef6c00;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .flex-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .bike-promo {
-    flex-direction: column;
-  }
-}
-
-
+/* Services Page */
 .services-container {
   max-width: 1200px;
   margin: auto;
@@ -319,19 +302,7 @@ section h2 {
   order: 1;
 }
 
-@media (max-width: 768px) {
-  .service-block {
-    flex-direction: column;
-  }
-
-  .right-img .service-img {
-    order: 0;
-  }
-
-  .right-img .service-details {
-    order: 1;
-  }
-}
+/* Book Button */
 .book-btn {
   display: inline-block;
   margin-top: 1.5rem;
@@ -347,14 +318,13 @@ section h2 {
 .book-btn:hover {
   background-color: #005f8d;
 }
+
+/* Footer */
 .site-footer {
   background-color: #2c3e50;
   color: #ffffff;
   padding: 1rem 0;
   text-align: center;
-  position: relative;
-  bottom: 0;
-  width: 100%;
   font-size: 1rem;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -365,7 +335,42 @@ section h2 {
   padding: 0 20px;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content {
+    left: 5%;
+    right: 5%;
+  }
+
+  .flex-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bike-promo {
+    flex-direction: column;
+  }
+
+  .service-block {
+    flex-direction: column;
+  }
+
+  .right-img .service-img {
+    order: 0;
+  }
+
+  .right-img .service-details {
+    order: 1;
+  }
+
+
+
+
+
   .site-footer {
     font-size: 0.9rem;
     padding: 1rem;

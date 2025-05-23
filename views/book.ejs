@@ -1,3 +1,4 @@
+<%- include('partials/header') %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book a Ride</title>
   <link rel="stylesheet" href="/css/book.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="container">
-    <button id="showFormBtn">Book a Ride</button>
+  <div class="containers">
 
     <form id="bookingForm" action="/book-ride" method="POST" enctype="multipart/form-data">
       <h2>Book Your Ride Across Uttarakhand</h2>
@@ -68,3 +69,4 @@
   </script>
 </body>
 </html>
+<%- include('partials/footer') %>

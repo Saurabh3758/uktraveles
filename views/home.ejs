@@ -1,14 +1,15 @@
+<%- include('partials/header') %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('partials/header') %>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/book.css">
 </head>
 <body>
 
  <!-- Hero Section (Same container) -->
 <section class="hero">
-  <img src="/images/uttarakhand.jpg" alt="Uttarakhand Travel" class="hero-img">
+  <img src="/images/uttarakhand.jpg" alt="Dehradun Travel Agency" class="hero-img">
   <div class="hero-content">
     <h1>Explore Uttarakhand with Uttarakhand Travel</h1>
     <p>Your one-stop solution for travel, rides & rentals</p>
@@ -89,7 +90,7 @@
         <li>Royal Enfield, Scooty, Pulsar & more</li>
         <li>Easy booking & verified documents</li>
       </ul>
-      <button onclick="window.location.href='/bike-rent'">Explore Bikes</button>
+      <button onclick="window.location.href='/bikeonrent'">Explore Bikes</button>
     </div>
     <div class="bike-img">
       <img src="/images/bike-rental.jpg" alt="Bike Rental">
@@ -98,25 +99,55 @@
 </div>
 
 <!-- Booking Form -->
-<div class="container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-  <section class="booking-form" id="booking" style="align-items: center;">
-    <h2>📝 Book Your Ride or Trip</h2>
-    <form action="/book" method="POST" enctype="multipart/form-data">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <input type="tel" name="phone" placeholder="Phone Number" required>
+ <div class="containers">
+
+    <form id="bookingForm" action="/book-ride" method="POST"  enctype="multipart/form-data">
+      <h2>Book Your Ride Across Uttarakhand</h2>
+
+      <label for="name">Full Name</label>
+      <input type="text" name="name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" required>
+
+      <label for="destination">Destination</label>
       <select name="destination" required>
-        <option value="">Select Destination</option>
-        <option value="Kedarnath">Kedarnath</option>
-        <option value="Nainital">Nainital</option>
-        <option value="Auli">Auli</option>
+        <option disabled selected>Select a destination</option>
+        <option>Dehradun</option>
+        <option>Mussoorie</option>
+        <option>Nainital</option>
+        <option>Rishikesh</option>
+        <option>Haridwar</option>
+        <option>Kedarnath</option>
+        <option>Badrinath</option>
+        <option>Joshimath</option>
+        <option>Chopta</option>
+        <option>Auli</option>
+        <option>Almora</option>
+        <option>Binsar</option>
+        <option>Kausani</option>
+        <option>Munsiyari</option>
+        <option>Valley of Flowers</option>
       </select>
-      <input type="file" name="aadharImage" accept=".jpg,.jpeg,.png" required>
+
+      <label for="startDate">Start Date</label>
+      <input type="date" name="startDate" required>
+
+      <label for="endDate">End Date</label>
+      <input type="date" name="endDate" required>
+
+      <label for="aadhaar">Upload Aadhaar (PDF/JPG)</label>
+      <input type="file" name="aadhaar" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <label for="photo">Upload Photo</label>
       <input type="file" name="photo" accept=".jpg,.jpeg,.png" required>
+
       <button type="submit">Submit Booking</button>
     </form>
-  </section>
-</div>
+  </div>
 
 <!-- Why Us -->
 <div class="container"style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
@@ -135,7 +166,7 @@
 <div class="container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
   <section class="cta" style="align-items: center;">
     <h2>📞 Ready to Ride?</h2>
-    <p>Call us now at <strong>+91-9876543210</strong> or click below to start your journey.</p>
+    <p>Call us now at <strong>+91-7060053712</strong> or click below to start your journey.</p>
     <button onclick="window.location.href='/book'">Book Now</button>
   </section>
 </div>
